@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal portfolio of Rhian V. Solis — web design, development, and creative work.">
+  <title>Rhian Solis | Portfolio</title>
+  <style>
+    :root {
+      --ink: #17232d;
+      --muted: #64717b;
+      --paper: #f5f3ee;
+      --white: #fffefa;
+      --accent: #d86d45;
+      --accent-dark: #ad4d2d;
+      --line: #deded8;
+      --soft: #e9e7df;
+      --radius: 18px;
+      --shadow: 0 18px 55px rgba(23, 35, 45, .09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wrap { width: min(1120px, calc(100% - 44px)); margin: auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(245,243,238,.9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(222,222,216,.8);
+    }
+    nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-size: 1rem; font-weight: 850; letter-spacing: -.04em; }
+    .brand span { color: var(--accent); }
+    .navlinks { display: flex; gap: 27px; align-items: center; }
+    .navlinks a { font-size: .88rem; color: var(--muted); font-weight: 650; transition: color .2s; }
+    .navlinks a:hover { color: var(--accent-dark); }
+    .nav-cta, .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 999px; padding: 12px 19px; font-weight: 750; font-size: .9rem;
+      border: 1px solid var(--ink); transition: .2s ease; cursor: pointer;
+    }
+    .nav-cta, .btn-dark { background: var(--ink); color: white; }
+    .nav-cta:hover, .btn-dark:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+    .menu-btn { display: none; border: 1px solid var(--line); background: var(--white); border-radius: 50%; width: 42px; height: 42px; color: var(--ink); }
+    .hero { padding: 92px 0 76px; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 58px; }
+    .eyebrow { color: var(--accent-dark); font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 850; }
+    h1 { font-size: clamp(3.2rem, 7vw, 6.5rem); line-height: .98; letter-spacing: -.075em; margin: 20px 0 24px; max-width: 760px; }
+    h1 em { color: var(--accent); font-style: normal; }
+    .hero-copy { max-width: 570px; color: var(--muted); font-size: 1.08rem; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+    .btn-outline { background: transparent; }
+    .btn-outline:hover { background: var(--white); transform: translateY(-2px); }
+    .hero-note { margin-top: 25px; color: var(--muted); font-size: .82rem; }
+    .hero-card {
+      background: var(--ink); color: white; border-radius: 26px; padding: 30px;
+      min-height: 390px; display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden; box-shadow: var(--shadow);
+    }
+    .hero-card:before {
+      content: ""; position: absolute; width: 260px; height: 260px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.18); right: -72px; top: -75px;
+      box-shadow: 0 0 0 28px rgba(255,255,255,.035), 0 0 0 58px rgba(255,255,255,.025);
+    }
+    .monogram { font-size: clamp(5rem, 11vw, 8rem); font-weight: 900; letter-spacing: -.1em; line-height: 1; color: #f5c7b3; position: relative; }
+    .card-bottom { position: relative; }
+    .card-bottom small { color: #b9c1c6; text-transform: uppercase; letter-spacing: .14em; font-size: .7rem; }
+    .card-bottom h2 { margin: 7px 0 0; font-size: 1.55rem; letter-spacing: -.04em; }
+    section { padding: 82px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 34px; }
+    .section-head h2 { font-size: clamp(2.2rem, 4vw, 3.5rem); letter-spacing: -.065em; line-height: 1; margin: 10px 0 0; }
+    .section-head p { color: var(--muted); max-width: 390px; margin: 0; }
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; }
+    .about-label { font-size: .78rem; color: var(--accent-dark); font-weight: 850; text-transform: uppercase; letter-spacing: .13em; }
+    .about-text { font-size: 1.18rem; color: #46545e; margin: 0; }
+    .about-text strong { color: var(--ink); }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+    .stat { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 17px; }
+    .stat b { display: block; font-size: 1.5rem; letter-spacing: -.05em; }
+    .stat span { color: var(--muted); font-size: .78rem; }
+    .dark-section { background: var(--ink); color: white; }
+    .dark-section .section-head p { color: #aeb8bf; }
+    .dark-section .eyebrow { color: #f0a184; }
+    .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .skill { border: 1px solid #394650; border-radius: var(--radius); padding: 23px; min-height: 155px; background: rgba(255,255,255,.025); }
+    .skill .num { color: #f0a184; font-size: .75rem; font-weight: 800; letter-spacing: .1em; }
+    .skill h3 { margin: 28px 0 5px; font-size: 1.08rem; }
+    .skill p { color: #aeb8bf; margin: 0; font-size: .86rem; }
+    .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .project { background: var(--white); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+    .project:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .project-art { min-height: 210px; padding: 24px; display: flex; align-items: end; position: relative; overflow: hidden; }
+    .project-art:before, .project-art:after { content: ""; position: absolute; border-radius: 50%; }
+    .art-one { background: #e6c7b8; }
+    .art-one:before { width: 210px; height: 210px; background: #d87956; right: 35px; top: -70px; }
+    .art-one:after { width: 135px; height: 135px; background: #f6e9dc; right: 105px; top: 35px; }
+    .art-two { background: #d9e0dc; }
+    .art-two:before { width: 240px; height: 240px; background: #73877d; right: -30px; bottom: -130px; }
+    .art-two:after { width: 120px; height: 120px; background: #f5f3ee; right: 65px; bottom: 30px; }
+    .art-three { background: #d9dce8; }
+    .art-three:before { width: 220px; height: 220px; background: #7883a5; right: 30px; top: -100px; }
+    .art-three:after { width: 110px; height: 110px; background: #f5f3ee; right: 100px; top: 30px; }
+    .art-four { background: #e8dfbd; }
+    .art-four:before { width: 220px; height: 220px; background: #b99b55; right: -40px; top: -90px; }
+    .art-four:after { width: 115px; height: 115px; background: #fffefa; right: 85px; top: 35px; }
+    .art-word { position: relative; z-index: 1; font-size: 1.8rem; font-weight: 900; letter-spacing: -.07em; color: rgba(23,35,45,.82); }
+    .project-info { padding: 22px 24px 25px; }
+    .project-type { color: var(--accent-dark); text-transform: uppercase; letter-spacing: .13em; font-size: .7rem; font-weight: 850; }
+    .project-info h3 { margin: 7px 0; font-size: 1.25rem; letter-spacing: -.035em; }
+    .project-info p { color: var(--muted); font-size: .9rem; margin: 0 0 16px; }
+    .project-link { font-size: .85rem; font-weight: 800; border-bottom: 1px solid var(--accent); padding-bottom: 3px; }
+    .timeline { border-top: 1px solid var(--line); }
+    .timeline-item { display: grid; grid-template-columns: 190px 1fr; gap: 28px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+    .timeline-item time { color: var(--accent-dark); font-size: .8rem; font-weight: 800; }
+    .timeline-item h3 { margin: 0 0 5px; font-size: 1.1rem; }
+    .timeline-item p { margin: 0; color: var(--muted); font-size: .92rem; }
+    .contact-panel { background: #e9e1d8; border-radius: 26px; padding: clamp(28px, 6vw, 60px); display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: end; }
+    .contact-panel h2 { font-size: clamp(2.3rem, 5vw, 4.2rem); letter-spacing: -.07em; line-height: 1; margin: 12px 0; max-width: 600px; }
+    .contact-panel p { color: #59656c; max-width: 520px; margin-bottom: 0; }
+    footer { padding: 28px 0; color: var(--muted); font-size: .82rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .socials { display: flex; gap: 18px; }
+    .socials a:hover { color: var(--accent-dark); }
+    @media (max-width: 800px) {
+      .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero { padding-top: 65px; }
+      .hero-card { min-height: 290px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-panel { grid-template-columns: 1fr; }
+      .section-head { align-items: start; flex-direction: column; }
+    }
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 30px, 1120px); }
+      nav { min-height: 68px; }
+      .menu-btn { display: inline-grid; place-items: center; }
+      .navlinks {
+        display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 20px 24px 24px;
+        background: var(--paper); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 17px;
+      }
+      .navlinks.open { display: flex; }
+      .nav-cta { text-align: center; }
+      .hero { padding: 55px 0; }
+      section { padding: 62px 0; }
+      .projects { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .skill { padding: 17px; min-height: 145px; }
+      .stats { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="wrap">
+      <a class="brand" href="#home">RH<span>.</span> SOLIS</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <div class="navlinks" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#work">Selected work</a>
+        <a href="#experience">Experience</a>
+        <a class="nav-cta" href="#contact">Let's connect ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Personal portfolio · 2026</div>
+          <h1>Creative ideas.<br><em>Thoughtful</em> digital work.</h1>
+          <p class="hero-copy">Hi, I'm <strong>Rhian Solis</strong> — an aspiring web designer and developer who enjoys creating clean, useful, and engaging digital experiences.</p>
+          <div class="hero-actions">
+            <a class="btn btn-dark" href="#work">Explore my work ↗</a>
+            <a class="btn btn-outline" href="#about">More about me</a>
+          </div>
+          <p class="hero-note">Based in the Philippines · Open to learning and creative opportunities</p>
+        </div>
+        <div class="hero-card">
+          <div class="eyebrow" style="color:#f0a184">Design · Build · Improve</div>
+          <div class="monogram">RS<span style="color:#d86d45">.</span></div>
+          <div class="card-bottom">
+            <small>Curiosity meets creativity</small>
+            <h2>Rhian Solis</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">01 / About</div><h2>A little about me.</h2></div>
+          <p>Building my skills, one idea and one project at a time.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-label">The person behind the work</div>
+          <div>
+            <p class="about-text">I am an <strong>Information Technology student</strong> with an interest in web design, front-end development, and visual communication. I enjoy combining creativity and technology to turn ideas into clear, user-friendly experiences. I am continuously learning, exploring new tools, and looking for opportunities to grow through meaningful projects and collaboration.</p>
+            <div class="stats">
+              <div class="stat"><b>01</b><span>Creative mindset</span></div>
+              <div class="stat"><b>02</b><span>Always learning</span></div>
+              <div class="stat"><b>03</b><span>Team-oriented</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="skills">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">02 / Capabilities</div><h2>What I bring.</h2></div>
+          <p>A growing mix of technical, creative, and organizational skills.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill"><div class="num">01 — DESIGN</div><h3>Graphic Design</h3><p>Visual layouts, Canva designs, and creative content.</p></article>
+          <article class="skill"><div class="num">02 — DEVELOPMENT</div><h3>Web Development</h3><p>Foundational HTML, CSS, and JavaScript.</p></article>
+          <article class="skill"><div class="num">03 — CREATIVE</div><h3>Content & Editing</h3><p>Digital content, editing, and visual storytelling.</p></article>
+          <article class="skill"><div class="num">04 — TEAMWORK</div><h3>Organization</h3><p>Communication, collaboration, planning, and budgeting.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">03 / Portfolio</div><h2>Selected work.</h2></div>
+        </div>
+        <div class="projects">
+          <article class="project">
+            <div class="project-art art-one"><div class="art-word">NAIL / STUDIO</div></div>
+            <div class="project-info"><div class="project-type">Web design · HTML / CSS</div><h3>Nail Appointment Website</h3><p>A clean appointment-booking concept with service selection, scheduling, and customer details.</p><a class="project-link" href="#contact">Ask about this project ↗</a></div>
+          </article>
+          <article class="project">
+            <div class="project-art art-two"><div class="art-word">PROTOTYPE 02</div></div>
+            <div class="project-info"><div class="project-type">UI / UX · Academic project</div><h3>Interface Design Prototype</h3><p>A progression from low-fidelity wireframes to a more refined, high-fidelity interface.</p><a class="project-link" href="#contact">Ask about this project ↗</a></div>
+          </article>
+          <article class="project">
+            <div class="project-art art-three"><div class="art-word">VISUAL NOTES</div></div>
+            <div class="project-info"><div class="project-type">Graphic design · Canva</div><h3>Social Media & Layout Designs</h3><p>Creative layouts and visual materials developed for communication and student activities.</p><a class="project-link" href="#contact">Ask about this project ↗</a></div>
+          </article>
+          <article class="project">
+            <div class="project-art art-four"><div class="art-word">WEB CONCEPT</div></div>
+            <div class="project-info"><div class="project-type">Web concept · In progress</div><h3>Personal Web Projects</h3><p>Small experiments focused on responsive layouts, accessible structure, and simple interactions.</p><a class="project-link" href="#contact">Ask about this project ↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">04 / Experience</div><h2>Learning beyond class.</h2></div>
+          <p>Student organization work has helped me build confidence, responsibility, and teamwork.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item"><time>STUDENT ORGANIZATION</time><div><h3>Layout & Graphic Artist · The Oracle</h3><p>Contribute to visual materials and publication-related creative work.</p></div></article>
+          <article class="timeline-item"><time>STUDENT ORGANIZATION</time><div><h3>Business Circulation Manager · The Oracle</h3><p>Support circulation-related responsibilities and coordination.</p></div></article>
+          <article class="timeline-item"><time>STUDENT LEADERSHIP</time><div><h3>Treasurer · Honor Society - CvSU Tanza Campus</h3><p>Develop financial responsibility, organization, and planning skills.</p></div></article>
+          <article class="timeline-item"><time>STUDENT ORGANIZATION</time><div><h3>Budget & Finance Committee Chief of Staff · Lipid Kabataan</h3><p>Support budget and finance-related coordination and responsibilities.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-panel">
+          <div>
+            <div class="eyebrow">05 / Get in touch</div>
+            <h2>Have an idea? Let's make it happen.</h2>
+            <p>I'm open to connecting, learning, and exploring creative or web-related opportunities. Feel free to reach out.</p>
+          </div>
+          <a class="btn btn-dark" href="mailto:your.email@example.com">Email me ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> Rhian Solis. All rights reserved.</span>
+      <div class="socials">
+        <a href="solisrhian052706@gmail.com" target="_blank" rel="noreferrer">Gmail ↗</a>
+        <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <a href="https://www.facebook.com/share/1JQB1MsFsV/0" target="_blank" rel="noreferrer">Facebook ↗</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", isOpen);
+      menuBtn.textContent = isOpen ? "×" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.textContent = "☰";
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
